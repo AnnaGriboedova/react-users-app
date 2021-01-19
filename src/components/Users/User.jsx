@@ -1,26 +1,42 @@
 import React from 'react'
 
-let User = ({user, removeUser}) => {
+export const UserListItem = ({user, removeUser}) => {
+    let UserNameEl = <UserName firstName={user.first_name} lastName={user.last_name}/>;
+    let UserRemoveBtnEl = <UserRemoveBtn removeUser={removeUser}
+                                         userId={user.id}/>;
+
+    return <li className='user'>{UserNameEl}{UserRemoveBtnEl}</li>
+};
+
+export const UserBlock = ({user, removeUser}) => {
+    let UserNameEl = <UserName firstName={user.first_name} lastName={user.last_name}/>;
+    let UserRemoveBtnEl = <UserRemoveBtn removeUser={removeUser}
+                                         userId={user.id}/>;
+
     return (
         <div className='user'>
             <div>
-                <img alt='avatar' src={user['avatar']}/>
+                <img alt='avatar' src={user.avatar}/>
             </div>
             <div>
-                <div>
-                    <b>
-                        <span>{user['first_name']}</span>
-                        <span>{user['last_name']}</span>
-                    </b>
-                </div>
-                <div>{user['email']}</div>
+                {UserNameEl}
+                <div>{user.email}</div>
             </div>
-            <button onClick={() => {
-                removeUser(user.id)
-            }}>Remove
-            </button>
+            {UserRemoveBtnEl}
         </div>
     )
 };
 
-export default User;
+const UserName = ({firstName, lastName}) => {
+    return <b>
+        <span>{firstName}</span>
+        <span>{lastName}</span>
+    </b>
+};
+
+const UserRemoveBtn = ({removeUser, userId}) => {
+    return <button className='user__buttonRemove' onClick={() => {
+        removeUser(userId)
+    }}>Remove
+    </button>
+};

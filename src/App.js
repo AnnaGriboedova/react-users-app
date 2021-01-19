@@ -13,12 +13,12 @@ function App() {
             <div className='contentContainer'>
                 <Switch>
                     <Route exact render={() =>
-                        <div>Home Page</div>
+                        <div className='homeContent'>Home Page</div>
                     } path='/'/>
 
                     <Route render={() =>
                         <UsersContainer/>
-                    } path='/users'/>
+                    } path='/employees'/>
 
                     <Route render={() => <div>404 page not found</div>} path='*'/>
                 </Switch>

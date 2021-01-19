@@ -6,19 +6,21 @@ import Users from "./Users";
 
 const UsersContainer = (props) => {
     let [isFetching, setIsFetching] = useState(true);
+    let users = props.users;
+
     useEffect(() => {
-        if (!props.users.length) {
+        if (!users.length) {
             props.requestUsers().then(() => {
                 setIsFetching(false);
             });
         }
-    }, []);
+    }, [users]);
 
-    if (isFetching && !props.users.length) {
+    if (isFetching && !users.length) {
         return "Загрузка"
     }
     const isEmptyRemoveUsers = !props.removeUsers.length;
-    return <div>{<Users users={props.users} removeUser={props.removeUser} addUser={props.addUser}
+    return <div>{<Users users={users} removeUser={props.removeUser} addUser={props.addUser}
                         isEmptyRemoveUsers={isEmptyRemoveUsers}/>}</div>
 };
 
